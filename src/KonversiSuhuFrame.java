@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,14 +12,27 @@
  * @author ASUS
  */
 public class KonversiSuhuFrame extends javax.swing.JFrame {
+ // Deklarasi komponen GUI dan variabel
+    
+    // ... komponen lainnya
 
-    /**
-     * Creates new form KonversiSuhuFrame
-     */
-    public KonversiSuhuFrame() {
-        initComponents();
+    // Tambahkan fungsi konversi suhu di sini
+   private double celciusToFahrenheit(double celcius) {
+        return (celcius * 9/5) + 32;
     }
 
+    private double fahrenheitToCelcius(double fahrenheit) {
+        return (fahrenheit - 32) * 5/9;
+    }
+    
+
+    // Constructor dan metode lainnya
+    public KonversiSuhuFrame() {
+        initComponents();
+       
+        
+    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,10 +46,10 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtInputSuhu = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboBoxSuhu = new javax.swing.JComboBox<>();
         btnKonversi = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
-        jLabel3 = new javax.swing.JLabel();
+        lblHasill = new javax.swing.JLabel();
         jRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,9 +63,25 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel2.setText("Masukkan Suhu");
 
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        txtInputSuhu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                txtInputSuhuActionPerformed(evt);
+            }
+        });
+
+        comboBoxSuhu.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        comboBoxSuhu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celcius", "Fahrenheit" }));
+        comboBoxSuhu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxSuhuActionPerformed(evt);
+            }
+        });
+
+        btnKonversi.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        btnKonversi.setText("Tombol Konversi");
+        btnKonversi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKonversiActionPerformed(evt);
             }
         });
 
@@ -61,8 +93,8 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel3.setText("Hasil");
+        lblHasill.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lblHasill.setText("Hasil");
 
         jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jRadioButton2.setText("Fahrenheit ke Celcius");
@@ -75,16 +107,15 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblHasill, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBoxSuhu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtInputSuhu)
-                            .addComponent(btnKonversi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -93,7 +124,8 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
                                         .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(22, 22, 22)
-                                        .addComponent(jLabel1)))
+                                        .addComponent(jLabel1))
+                                    .addComponent(btnKonversi, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 18, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -107,7 +139,7 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtInputSuhu, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboBoxSuhu, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnKonversi, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -115,7 +147,7 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
                     .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblHasill, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
 
@@ -127,7 +159,7 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -139,9 +171,33 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void comboBoxSuhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSuhuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_comboBoxSuhuActionPerformed
+
+    private void btnKonversiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKonversiActionPerformed
+        try {
+            double input = Double.parseDouble(txtInputSuhu.getText());
+            double hasil = 0;
+            if (jRadioButton1.isSelected()) {
+                hasil = celciusToFahrenheit(input);
+                lblHasill.setText(String.format("%.2f °F", hasil));
+            } else if (jRadioButton2.isSelected()) {
+                hasil = fahrenheitToCelcius(input);
+                lblHasill.setText(String.format("%.2f °C", hasil));
+            } else {
+                JOptionPane.showMessageDialog(this, "Pilih arah konversi terlebih dahulu!");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Masukkan angka yang valid!");
+        }
+        
+        
+    }//GEN-LAST:event_btnKonversiActionPerformed
+
+    private void txtInputSuhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInputSuhuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtInputSuhuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,13 +236,13 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKonversi;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> comboBoxSuhu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JLabel lblHasill;
     private javax.swing.JTextField txtInputSuhu;
     // End of variables declaration//GEN-END:variables
 }
