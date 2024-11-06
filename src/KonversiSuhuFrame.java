@@ -209,7 +209,7 @@ private double kelvinToCelcius(double kelvin) {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void comboBoxSuhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSuhuActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_comboBoxSuhuActionPerformed
 
     private void btnKonversiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKonversiActionPerformed
