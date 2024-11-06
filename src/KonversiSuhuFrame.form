@@ -133,6 +133,8 @@
         <Component class="javax.swing.JTextField" name="txtInputSuhu">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtInputSuhuActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtInputSuhuKeyReleased"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtInputSuhuKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="comboBoxSuhu">
@@ -141,9 +143,11 @@
               <Font name="Tahoma" size="16" style="1"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
+              <StringArray count="4">
                 <StringItem index="0" value="Celcius"/>
                 <StringItem index="1" value="Fahrenheit"/>
+                <StringItem index="2" value="Reamur"/>
+                <StringItem index="3" value="kelvin"/>
               </StringArray>
             </Property>
           </Properties>
@@ -173,6 +177,7 @@
             <Property name="text" type="java.lang.String" value="Celcius ke Fahrenheit"/>
           </Properties>
           <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButton1ItemStateChanged"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton1ActionPerformed"/>
           </Events>
         </Component>
@@ -191,6 +196,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Fahrenheit ke Celcius"/>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButton2ItemStateChanged"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

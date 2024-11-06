@@ -12,9 +12,28 @@ import javax.swing.JOptionPane;
  * @author ASUS
  */
 public class KonversiSuhuFrame extends javax.swing.JFrame {
- // Deklarasi komponen GUI dan variabel
-    
-    // ... komponen lainnya
+    // Tambahkanfungsi konversi untuk skala lain
+   private double celciusToReamur(double celcius) {
+       return celcius * 4/5;
+   }
+
+   private double celciusToKelvin(double celcius) {
+       return celcius + 273.15;
+   }
+
+   private double fahrenheitToKelvin(double fahrenheit) {
+       return ((fahrenheit - 32) * 5/9) + 273.15;
+   }
+
+   private double reamurToCelcius(double reamur) {
+       return reamur * 5/4;
+   }
+
+private double kelvinToCelcius(double kelvin) {
+    return kelvin - 273.15;
+}
+
+// Anda dapat menambahkan metode lainnya sesuai kebutuhan
 
     // Tambahkan fungsi konversi suhu di sini
    private double celciusToFahrenheit(double celcius) {
@@ -68,9 +87,17 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
                 txtInputSuhuActionPerformed(evt);
             }
         });
+        txtInputSuhu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtInputSuhuKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtInputSuhuKeyTyped(evt);
+            }
+        });
 
         comboBoxSuhu.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        comboBoxSuhu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celcius", "Fahrenheit" }));
+        comboBoxSuhu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celcius", "Fahrenheit", "Reamur", "kelvin" }));
         comboBoxSuhu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxSuhuActionPerformed(evt);
@@ -87,6 +114,11 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
 
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jRadioButton1.setText("Celcius ke Fahrenheit");
+        jRadioButton1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton1ItemStateChanged(evt);
+            }
+        });
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
@@ -98,6 +130,11 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
 
         jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jRadioButton2.setText("Fahrenheit ke Celcius");
+        jRadioButton2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton2ItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -168,7 +205,7 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void comboBoxSuhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSuhuActionPerformed
@@ -176,28 +213,56 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxSuhuActionPerformed
 
     private void btnKonversiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKonversiActionPerformed
-        try {
-            double input = Double.parseDouble(txtInputSuhu.getText());
-            double hasil = 0;
+         try {
+        double input = Double.parseDouble(txtInputSuhu.getText());
+        double hasil = 0;
+        
+        String selectedScale = (String) comboBoxSuhu.getSelectedItem();
+
+        if (selectedScale.equals("Celcius")) {
             if (jRadioButton1.isSelected()) {
                 hasil = celciusToFahrenheit(input);
                 lblHasill.setText(String.format("%.2f °F", hasil));
             } else if (jRadioButton2.isSelected()) {
+                hasil = celciusToReamur(input);
+                lblHasill.setText(String.format("%.2f °R", hasil));
+            }
+        } else if (selectedScale.equals("Fahrenheit")) {
+            if (jRadioButton1.isSelected()) {
                 hasil = fahrenheitToCelcius(input);
                 lblHasill.setText(String.format("%.2f °C", hasil));
-            } else {
-                JOptionPane.showMessageDialog(this, "Pilih arah konversi terlebih dahulu!");
+            } else if (jRadioButton2.isSelected()) {
+                hasil = fahrenheitToKelvin(input);
+                lblHasill.setText(String.format("%.2f K", hasil));
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Masukkan angka yang valid!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Pilih skala konversi yang valid!");
         }
-        
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Masukkan angka yang valid!");
+    }
         
     }//GEN-LAST:event_btnKonversiActionPerformed
 
     private void txtInputSuhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInputSuhuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtInputSuhuActionPerformed
+
+    private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ItemStateChanged
+
+    private void jRadioButton2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton2ItemStateChanged
+       
+    }//GEN-LAST:event_jRadioButton2ItemStateChanged
+
+    private void txtInputSuhuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInputSuhuKeyTyped
+       
+    }//GEN-LAST:event_txtInputSuhuKeyTyped
+
+    private void txtInputSuhuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInputSuhuKeyReleased
+         btnKonversiActionPerformed(null); // Panggil metode konversi
+    }//GEN-LAST:event_txtInputSuhuKeyReleased
 
     /**
      * @param args the command line arguments
